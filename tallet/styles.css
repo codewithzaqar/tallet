@@ -1,0 +1,25 @@
+Screen {
+    layout: vertical;
+    background: black;
+}
+
+Header {
+    background: blue;
+    color: white;
+}
+
+Footer {
+    background: darkgray;
+    color: white;
+}
+
+.list-container {
+    width: 30%;
+    margin: 1;
+    padding: 1;
+    border: tall white;
+}
+
+Static {
+    padding: 1;
+}
