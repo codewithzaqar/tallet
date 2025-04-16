@@ -26,8 +26,22 @@ Static {
 
 Input {
     margin-top: 1;
+    border: tall grey;
+}
+
+Input:focus {
+    border: tall yellow;
 }
 
 Button {
     margin-top: 1;
+}
+
+#list_form {
+    padding: 1;
+    margin-bottom: 1;
+}
+
+.hidden {
+    display: none;
 }

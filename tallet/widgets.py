@@ -42,13 +42,15 @@ class ListWidget(Static):
             yield CardWidget(card, id=f"card_{i}")
         yield Input(placeholder="New card title", id="new_card_input")
         yield Button("Add Card", id="add_card_button")
+        yield Input(placeholder="Edit card title", id="edit_card_input", classes="hidden")
 
     def select_card(self, index: int) -> None:
         """Select a card by index."""
-        if 0 <= index < len(self.tallet_list.cards):
-            self.selected_card_index = index
-            for i, card_widget in enumerate(self.query(CardWidget)):
-                card_widget.selected = i == index
+        self.selected_card_index = index
+        edit_input = self.query_one("#edit_card_input", Input)
+        edit_input.display = index >= 0  # Show edit input if a card is selected
+        for i, card_widget in enumerate(self.query(CardWidget)):
+            card_widget.selected = i == index
 
 
 class BoardWidget(Static):
@@ -61,7 +63,12 @@ class BoardWidget(Static):
         self.board = board
 
     def compose(self) -> ComposeResult:
-        with Horizontal():
+        yield Horizontal(
+            Input(placeholder="New list name", id="new_list_input"),
+            Button("Add List", id="add_list_button"),
+            id="list_form",
+        )
+        with Horizontal(id="lists_container"):
             for i, tallet_list in enumerate(self.board.lists):
                 yield Vertical(
                     ListWidget(tallet_list, id=f"list_{i}"),
